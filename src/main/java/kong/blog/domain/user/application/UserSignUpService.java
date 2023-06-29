@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
 @Service
-public class UserService {
+public class UserSignUpService {
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserSignUpService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

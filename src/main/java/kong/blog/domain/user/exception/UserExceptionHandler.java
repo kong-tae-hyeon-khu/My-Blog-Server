@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-public class DuplicateUserExceptionHandler {
+public class UserExceptionHandler {
 
     @ExceptionHandler(DuplicateUserException.class)
     @ResponseBody
