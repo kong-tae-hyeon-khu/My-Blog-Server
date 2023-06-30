@@ -18,5 +18,12 @@ public class UserExceptionHandler {
         return new ErrorResponse(ex.getMessage());
     }
 
+    @ExceptionHandler(NoExistUserException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleNoExistUserException(NoExistUserException ex) {
+        return new ErrorResponse(ex.getMessage());
+    }
+
 
 }
