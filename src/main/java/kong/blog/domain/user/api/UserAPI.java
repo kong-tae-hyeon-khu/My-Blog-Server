@@ -20,12 +20,12 @@ public class UserAPI {
         this.userSignInService = userSignInService;
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
+    @RequestMapping(value = "/users", method = RequestMethod.POST)
     public ResponseEntity<SignUp.SignUpRes> signUp(@RequestBody SignUp.SignUpReq dto) {
         return new ResponseEntity<>(new SignUp.SignUpRes(userSignUpService.signUp(dto)), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/users/login", method = RequestMethod.POST)
     public ResponseEntity<SignIn.SignInRes> signIn(@RequestBody SignIn.SignInReq dto) {
         return new ResponseEntity<>(new SignIn.SignInRes(userSignInService.SignIn(dto),"Login Success"), HttpStatus.OK);
     }
