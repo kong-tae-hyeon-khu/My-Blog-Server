@@ -17,7 +17,7 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 
-/src/main/resources/application-aws.properties
+/src/main/resources/application-mysql.properties
 ### IntelliJ IDEA ###
 .idea
 *.iws
