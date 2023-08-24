@@ -21,25 +21,22 @@ public class SignIn {
     }
 
     public static class SignInRes {
+        private String token;
         private String message;
-        private String email;
-        private String password;
 
-        public SignInRes(User u, String message) {
+        public SignInRes(String token, String message) {
+            this.token = token;
             this.message = message;
-            this.email = u.getEmail();
-            this.password = u.getPassword();
+
         }
 
         public String getMessage() {
-            return message;
+            return this.message;
         }
-        public String getEmail() {
-            return email;
+        public String getToken() {
+            return this.token;
         }
-        public String getPassword() {
-            return password;
-        }
+
 
     }
 }
