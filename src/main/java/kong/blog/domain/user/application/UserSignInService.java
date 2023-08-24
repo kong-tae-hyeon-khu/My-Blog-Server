@@ -27,8 +27,8 @@ public class UserSignInService {
             User u = user.get();
             if ( u.getPassword().equals(password)) {
                 return u;
-            } throw new NoExistUserException("Please Check Password");
+            } throw new NoExistUserException();
         }
-        throw new NoExistUserException("No This User Exist");
+        throw new NoExistUserException();
     }
 }

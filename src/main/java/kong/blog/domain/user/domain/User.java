@@ -16,8 +16,8 @@ public class User extends BaseEntity {
     private String email;
     @Column
     private String password;
-    @Column(name = "is_admin")
-    private boolean isAdmin;
+    @Column
+    private String role;
 
     public User() {};
     public User(String name, String email, String password, LocalDateTime createdAt) {
@@ -25,6 +25,8 @@ public class User extends BaseEntity {
         this.email = email;
         this.password = password;
         this.setCreatedAt(createdAt);
+
+        this.role = "USER"; // Default .
     }
 
     // Getter
@@ -40,10 +42,7 @@ public class User extends BaseEntity {
     public String getPassword() {
         return this.password;
     }
-
-    public boolean getIsAdmin() {
-        return this.isAdmin;
-    }
+    public String getRole() {return  this.role;}
 
 
 }
