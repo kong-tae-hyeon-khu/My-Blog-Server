@@ -21,7 +21,7 @@ public class UserSignUpService {
         LocalDateTime createdAt = LocalDateTime.now();
 
         if (userRepository.existsByEmail(dto.getEmail())) {
-            throw new DuplicateUserException("Duplicate User Found");
+            throw new DuplicateUserException();
         }
 
         User user = new User(dto.getName(), dto.getEmail(), dto.getPassword(), createdAt);

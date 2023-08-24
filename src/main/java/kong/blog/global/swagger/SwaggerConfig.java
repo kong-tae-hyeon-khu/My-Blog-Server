@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+
 public class SwaggerConfig {
     @Bean
     public GroupedOpenApi publicApi() {
@@ -24,4 +25,6 @@ public class SwaggerConfig {
                         .description("설명")
                         .version("버전"));
     }
+
+
 }
