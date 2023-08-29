@@ -25,13 +25,16 @@ const LoginForm = () => {
         console.log('Password : ', Password)
 
 
-        let body = {
-            email : Email,
-            password : Password
-        }
+
 
         try {
-            const response = await axios.post('http://localhost:8080/user/signin', body);
+            const response = await axios.post('http://localhost:8080/user/signin',
+                {
+                    email : Email,
+                    password : Password
+                    }
+
+            );
 
             if (response.status === 200) {
                 console.log("로그인 성공", response)
