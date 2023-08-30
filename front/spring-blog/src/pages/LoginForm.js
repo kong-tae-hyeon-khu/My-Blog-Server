@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import styles from '../styles/LoginForm.module.css';
+import styles from '../styles/Form.module.css';
 import Button from "../components/Button";
 
 
