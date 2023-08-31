@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styles from '../styles/Form.module.css'
 import Button from "../components/Button";
+import axios from "axios";
 
 
 const RegisterForm = () => {
@@ -22,9 +23,25 @@ const RegisterForm = () => {
         setPassword(event.currentTarget.value);
     }
 
-    const onSubmitHandler = (event) => {
+    const onSubmitHandler = async (event) => {
         event.preventDefault();
         console.log(name, email, password);
+        try {
+            const response = await axios.post("http://localhost:8080/user/signup",
+                {
+                    name : name,
+                    email : email,
+                    password: password
+                })
+            if (response.status === 200) {
+                console.log("회원가입 성공", response)
+            } else {
+                console.log("회원가입 실패", response)
+            }
+
+        } catch (e) {
+            console.log(e)
+        }
     }
 
 
