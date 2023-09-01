@@ -1,6 +1,7 @@
 package kong.blog.domain.user.application;
 
 import kong.blog.domain.user.dao.UserRepository;
+import kong.blog.domain.user.domain.User;
 import kong.blog.domain.user.exception.NoExistUserException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,4 +20,5 @@ public class CustomUserDetailService implements UserDetailsService {
         return userRepository.findByEmail(username)
                 .orElseThrow(NoExistUserException::new);
     }
+
 }
