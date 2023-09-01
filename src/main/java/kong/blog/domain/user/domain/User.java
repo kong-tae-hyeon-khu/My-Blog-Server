@@ -22,8 +22,9 @@ public class User extends BaseEntity implements UserDetails {
     private String email;
     @Column
     private String password;
-    @Column
-    private String role;
+    @Column(name="role")
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     public User() {};
     public User(String name, String email, String password, LocalDateTime createdAt) {
@@ -32,7 +33,7 @@ public class User extends BaseEntity implements UserDetails {
         this.password = password;
         this.setCreatedAt(createdAt);
 
-        this.role = "ROLE_USER"; // Default .
+        this.role = Role.ROLE_USER; // Default .
     }
 
     // Getter
@@ -48,13 +49,13 @@ public class User extends BaseEntity implements UserDetails {
     public String getPassword() {
         return this.password;
     }
-    public String getRole() {return  this.role;}
+    public String getRole() {return  this.role.toString();}
 
     // Override
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(this.role));
+        authorities.add(new SimpleGrantedAuthority(this.role.toString()));
         return authorities;
     }
     @Override
