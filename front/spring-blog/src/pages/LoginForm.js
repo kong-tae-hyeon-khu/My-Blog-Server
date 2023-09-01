@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import styles from '../styles/Form.module.css';
 import Button from "../components/Button";
+import {setCookie} from "../settings/cookie";
 
 
 const LoginForm = () => {
@@ -38,6 +39,7 @@ const LoginForm = () => {
 
             if (response.status === 200) {
                 console.log("로그인 성공", response.data)
+                setCookie("jwt", response.data.token);
             }
             else {
                 console.log("로그인 실패", response)
