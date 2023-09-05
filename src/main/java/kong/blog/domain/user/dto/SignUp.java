@@ -21,7 +21,7 @@ public class SignUp {
     }
 
     public static class SignUpRes {
-        private int id;
+        private Long id;
         private String name;
         private String email;
         private String password;
@@ -32,7 +32,7 @@ public class SignUp {
             this.email = user.getEmail();
             this.password = user.getPassword();
         }
-        public int getId() {return this.id;}
+        public Long getId() {return this.id;}
         public String getName() {return this.name;}
         public String getEmail() {return this.email;}
         public String getPassword() {return this.password;}
