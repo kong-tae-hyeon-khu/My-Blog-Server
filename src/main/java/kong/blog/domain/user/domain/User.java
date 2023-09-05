@@ -15,7 +15,7 @@ import java.util.List;
 public class User extends BaseEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     @Column
     private String name;
     @Column(unique = true)
@@ -37,7 +37,7 @@ public class User extends BaseEntity implements UserDetails {
     }
 
     // Getter
-    public int getId() {
+    public Long getId() {
         return this.id;
     }
     public String getName() {
