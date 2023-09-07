@@ -13,17 +13,13 @@ public class Post_img extends BaseEntity {
     @Column(name = "img_url")
     private String img;
 
-    @ManyToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
+
 
     public Post_img() {};
-    public Post_img(String img, Post post) {
+    public Post_img(String img) {
         this.img = img;
-        this.post = post;
     }
 
     // Getter
     public String getImg() {return this.img;}
-    public Post getPost() {return this.post;}
 }
