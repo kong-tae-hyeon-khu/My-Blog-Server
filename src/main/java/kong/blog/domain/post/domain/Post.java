@@ -5,6 +5,7 @@ import kong.blog.domain.user.domain.User;
 import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Post extends BaseEntity {
@@ -22,11 +23,16 @@ public class Post extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToMany
+    @JoinColumn(name = "post_id")
+    private List<Post_img> postImg;
+
     public Post() {}
-    public Post(String title, String content, User user) {
+    public Post(String title, String content, User user, List<Post_img> postImg) {
         this.title = title;
         this.content = content;
         this.user = user;
+        this.postImg = postImg;
     }
 
     // Getter
@@ -42,5 +48,6 @@ public class Post extends BaseEntity {
     public User getUser() {
         return user;
     }
+    public List<Post_img> getPostImg() {return postImg;}
 
 }
