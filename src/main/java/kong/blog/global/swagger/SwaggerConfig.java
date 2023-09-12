@@ -29,20 +29,20 @@ public class SwaggerConfig {
                 .description("설명")
                 .version("버전");
 
+        // 보안 스킴을 변경합니다. "bearer" 대신 "apiKey"을 사용하고 "Authorization" 대신 "ApiKeyAuth"를 지정합니다.
         SecurityScheme securityScheme = new SecurityScheme()
-                .type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")
-                .in(SecurityScheme.In.HEADER).name("Authorization");
+                .type(SecurityScheme.Type.APIKEY)
+                .in(SecurityScheme.In.HEADER)
+                .name("Authorization");
 
-        SecurityRequirement securityRequirement = new SecurityRequirement().addList("bearerAuth");
-                //        return new OpenAPI()
-//                .info(new Info().title("제목")
-//                        .description("설명")
-//                        .version("버전"));
-                return new OpenAPI().info(info)
-                        .components(new Components().addSecuritySchemes("bearerAuth", securityScheme))
-                        .security(Arrays.asList(securityRequirement));
+        // 보안 요구사항을 변경합니다.
+        SecurityRequirement securityRequirement = new SecurityRequirement().addList("ApiKeyAuth");
 
+        return new OpenAPI().info(info)
+                .components(new Components().addSecuritySchemes("ApiKeyAuth", securityScheme))
+                .security(Arrays.asList(securityRequirement));
     }
+
 
 
 }
