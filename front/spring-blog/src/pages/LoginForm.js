@@ -40,7 +40,7 @@ const LoginForm = () => {
             if (response.status === 200) {
                 console.log("로그인 성공", response.data)
                 setCookie("jwt", response.data.token);
-                window.location.reload("/");
+                window.location.reload();
             }
             else {
                 console.log("로그인 실패", response)
