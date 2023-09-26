@@ -32,7 +32,6 @@ public class SecurityConfiguration {
                 .formLogin().disable()
 
 
-
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // JWT 토큰 방식을 사용할거니까!
                 .and()
@@ -41,7 +40,7 @@ public class SecurityConfiguration {
 
                 .authorizeRequests()
                 .antMatchers(PERMIT_URL_ARRAY).permitAll()
-                .antMatchers("/user/signup", "/user/signin" , "/post").permitAll() // 로그인 부분 항상 접근할 수 있도록.
+                .antMatchers("/user/signup", "/user/signin").permitAll() // 로그인 부분 항상 접근할 수 있도록.
                 .anyRequest().hasAnyRole("USER", "ADMIN")
                 .and()
 

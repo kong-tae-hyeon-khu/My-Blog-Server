@@ -60,7 +60,7 @@ public class User extends BaseEntity implements UserDetails {
     }
     @Override
     public String getUsername() {
-        return this.email;
+        return Long.toString(this.id);
     }
 
     @Override
