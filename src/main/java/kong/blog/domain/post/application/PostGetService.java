@@ -31,7 +31,7 @@ public class PostGetService {
                 post.getUser().getId(),
                 post.getTitle(),
                 post.getContent(),
-                post.getPostImg(),
+                post.getImgUrls(),
                 post.getCreatedAt()
         );
 

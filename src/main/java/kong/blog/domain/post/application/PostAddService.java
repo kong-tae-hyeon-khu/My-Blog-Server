@@ -21,10 +21,14 @@ public class PostAddService {
     private final UserRepository userRepository;
     private final Post_imgRepository postImgRepository;
 
-    public PostAddService(PostRepository postRepository, UserRepository userRepository, Post_imgRepository postImgRepository) {
+    private final ImageUploadService imageUploadService;
+
+    public PostAddService(PostRepository postRepository, UserRepository userRepository, Post_imgRepository postImgRepository, ImageUploadService imageUploadService) {
         this.postRepository = postRepository;
         this.userRepository = userRepository;
         this.postImgRepository = postImgRepository;
+        this.imageUploadService = imageUploadService;
+
 
     }
 
@@ -36,20 +40,21 @@ public class PostAddService {
         if (authentication != null) {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String currentUserName = userDetails.getUsername();
-            System.out.println(currentUserName);
-            Optional<User> user = userRepository.findByEmail(currentUserName);
+            Optional<User> user = userRepository.findById(Long.parseLong(currentUserName));
 
+            // 수정하기.
             List<Post_img> postImgs = new ArrayList<>();
 
-//            for (String url : imgUrls) {
-//                Post_img postImg = new Post_img(url);
-//                postImgs.add(postImg);
-//                postImgRepository.save(postImg);
-//            }
+            List<String> imgUrls =  imageUploadService.imagesUpload(dto.getFiles());
+            for (String url : imgUrls) {
+                Post_img postImg = new Post_img(url);
+                postImgs.add(postImg);
+                postImgRepository.save(postImg);
+            }
 
-//            kong.blog.domain.post.domain.Post post = new kong.blog.domain.post.domain.Post(dto.getTitle(), dto.getContent(), user.get() ,postImgs);
-//            postRepository.save(post);
-//            return true;
+            kong.blog.domain.post.domain.Post post = new kong.blog.domain.post.domain.Post(dto.getTitle(), dto.getContent(), user.get() ,postImgs);
+            postRepository.save(post);
+            return true;
         }
 
         return false;
