@@ -4,6 +4,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import RegisterForm from "./pages/RegisterForm";
 import Main from "./pages/Main";
 import {getCookie} from "./settings/cookie";
+import PostsForm from "./pages/PostsForm";
 function App() {
 
     const toekn = getCookie("jwt");
@@ -14,6 +15,7 @@ function App() {
                 <Routes>
                     <Route path="signin" element={<LoginForm/>}></Route>t
                     <Route path="signup" element={<RegisterForm/>}></Route>
+                    <Route path="post" element={toekn ? <PostsForm /> : <LoginForm />}></Route>
                     <Route path="/" element={toekn ? <Main/> : <LoginForm/>}></Route>
                 </Routes>
 

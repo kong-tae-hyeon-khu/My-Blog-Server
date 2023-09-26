@@ -5,6 +5,7 @@ import kong.blog.domain.user.domain.User;
 import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,6 +34,18 @@ public class Post extends BaseEntity {
         this.content = content;
         this.user = user;
         this.postImg = postImg;
+    }
+
+    public List<String> getImgUrls() {
+
+        List<String> imgUrls = new ArrayList<>();
+        List<Post_img> postImgs = this.postImg;
+
+        for (Post_img post_img : postImgs) {
+            imgUrls.add(post_img.getImg());
+        }
+
+        return imgUrls;
     }
 
     // Getter

@@ -2,6 +2,7 @@ package kong.blog.domain.post.api;
 
 import kong.blog.domain.post.application.ImageUploadService;
 import kong.blog.domain.post.application.PostAddService;
+import kong.blog.domain.post.application.PostGetService;
 import kong.blog.domain.post.dto.Get;
 import kong.blog.domain.post.dto.Post;
 import org.springframework.http.MediaType;
@@ -12,15 +13,16 @@ public class PostAPI {
 
     private final ImageUploadService imageUploadService;
     private final PostAddService postAddService;
+    private final PostGetService postGetService;
 
-    public PostAPI(ImageUploadService imageUploadService, PostAddService postAddService) {
+    public PostAPI(ImageUploadService imageUploadService, PostAddService postAddService, PostGetService postGetService) {
         this.imageUploadService = imageUploadService;
         this.postAddService = postAddService;
+        this.postGetService = postGetService;
     }
 
     @PostMapping(path = "/post", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public boolean uploadPost(@ModelAttribute Post.Request dto) {
-        System.out.println(dto.getTitle());
         postAddService.addPost(dto);
         return true;
     }
@@ -28,7 +30,7 @@ public class PostAPI {
     // 특정 하나의 게시글 조회
     @GetMapping(path = "/post/{id}")
     public Get.GetResDto getPost(@PathVariable("id") Long id) {
-
+        return postGetService.getPost(id);
     }
 
     // 내 게시글 조회.
