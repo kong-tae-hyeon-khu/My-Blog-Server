@@ -5,8 +5,13 @@ import kong.blog.domain.post.dao.PostRepository;
 import kong.blog.domain.post.domain.Post;
 import kong.blog.domain.post.dto.Get;
 import kong.blog.domain.user.dao.UserRepository;
+import kong.blog.domain.user.domain.User;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,7 +39,18 @@ public class PostGetService {
                 post.getImgUrls(),
                 post.getCreatedAt()
         );
-
-
     }
+    public List<Post> getMyPost() throws RuntimeException {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (authentication != null) {
+                UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+                Long currentUserId = Long.parseLong(userDetails.getUsername());
+                User user = userRepository.findById(currentUserId).get();
+                return postRepository.findAllByUser(user);
+            }
+            else {
+                throw new RuntimeException("Not Exist User");
+            }
+        }
+
 }

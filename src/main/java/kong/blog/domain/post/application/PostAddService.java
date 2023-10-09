@@ -35,14 +35,14 @@ public class PostAddService {
     public boolean addPost(Post.Request dto) {
 
 
-        // 수정하기.
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            String currentUserName = userDetails.getUsername();
-            Optional<User> user = userRepository.findById(Long.parseLong(currentUserName));
+            String currentUserId = userDetails.getUsername();
+            Optional<User> user = userRepository.findById(Long.parseLong(currentUserId));
 
-            // 수정하기.
+
             List<Post_img> postImgs = new ArrayList<>();
 
             List<String> imgUrls =  imageUploadService.imagesUpload(dto.getFiles());

@@ -4,6 +4,17 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Get {
+    public static class GetDto {
+        private Long userId;
+        private String title;
+        private LocalDateTime created_at;
+
+        public GetDto(Long userId, String title, LocalDateTime created_at) {
+            this.userId = userId;
+            this.title = title;
+            this.created_at = created_at;
+        }
+    }
     public static class GetResDto {
         private Long userId;
         private String title;
