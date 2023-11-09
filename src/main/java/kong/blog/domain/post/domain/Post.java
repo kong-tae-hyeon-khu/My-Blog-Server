@@ -63,4 +63,6 @@ public class Post extends BaseEntity {
     }
     public List<Post_img> getPostImg() {return postImg;}
 
+    // Setter
+    public void setUser(User user) {this.user = user;}
 }

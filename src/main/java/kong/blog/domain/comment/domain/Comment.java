@@ -24,4 +24,8 @@ public class Comment extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "comment_at")
     private Post post;
+
+
+    // Setter
+    public void setUser(User user) {this.user = user;}
 }
