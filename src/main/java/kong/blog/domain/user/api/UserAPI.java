@@ -1,7 +1,9 @@
 package kong.blog.domain.user.api;
 
+import kong.blog.domain.user.application.UserDeleteService;
 import kong.blog.domain.user.application.UserSignInService;
 import kong.blog.domain.user.application.UserSignUpService;
+import kong.blog.domain.user.dto.DeleteUser;
 import kong.blog.domain.user.dto.SignIn;
 import kong.blog.domain.user.dto.SignUp;
 import org.apache.coyote.Response;
@@ -17,9 +19,12 @@ public class UserAPI {
 
     private final UserSignUpService userSignUpService;
     private final UserSignInService userSignInService;
-    public UserAPI(UserSignUpService userSignUpService, UserSignInService userSignInService) {
+    private final UserDeleteService userDeleteService;
+
+    public UserAPI(UserSignUpService userSignUpService, UserSignInService userSignInService, UserDeleteService userDeleteService) {
         this.userSignUpService = userSignUpService;
         this.userSignInService = userSignInService;
+        this.userDeleteService = userDeleteService;
     }
 
     @RequestMapping(value = "/user/signup", method = RequestMethod.POST)
@@ -47,8 +52,10 @@ public class UserAPI {
      * Delete User => 해당 유저를 참조하는 데이터들에 대해서 처리해야할 것.
      * **/
     @RequestMapping(value = "/user/delete" , method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteUser(Authentication authentication) {
+    public ResponseEntity<DeleteUser> deleteUser(Authentication authentication) {
         Long userId = Long.parseLong(((UserDetails)authentication.getPrincipal()).getUsername());
+        userDeleteService.DeleteUser(userId);
 
+        return new ResponseEntity<>(new DeleteUser(userId, "Delete Success"),HttpStatus.OK);
     }
 }
