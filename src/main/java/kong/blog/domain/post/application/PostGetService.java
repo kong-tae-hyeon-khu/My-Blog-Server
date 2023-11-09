@@ -42,6 +42,7 @@ public class PostGetService {
     }
     public List<Post> getMyPost() throws RuntimeException {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
             if (authentication != null) {
                 UserDetails userDetails = (UserDetails) authentication.getPrincipal();
                 Long currentUserId = Long.parseLong(userDetails.getUsername());
