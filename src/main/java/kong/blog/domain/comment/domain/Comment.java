@@ -25,7 +25,15 @@ public class Comment extends BaseEntity {
     @JoinColumn(name = "comment_at")
     private Post post;
 
+    // 생성자
+    public Comment(String contents, User user, Post post) {
+        this.contents = contents;
+        this.user = user;
+        this.post = post;
+    }
 
+    public Comment() {}
     // Setter
     public void setUser(User user) {this.user = user;}
+
 }
