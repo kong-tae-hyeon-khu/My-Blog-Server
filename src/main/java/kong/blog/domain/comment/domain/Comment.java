@@ -36,4 +36,7 @@ public class Comment extends BaseEntity {
     // Setter
     public void setUser(User user) {this.user = user;}
 
+    // Getter
+    public String getContents() {return this.contents;}
+
 }
