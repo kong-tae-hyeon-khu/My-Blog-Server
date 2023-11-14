@@ -38,5 +38,6 @@ public class Comment extends BaseEntity {
 
     // Getter
     public String getContents() {return this.contents;}
+    public Long getId() {return this.id;}
 
 }
