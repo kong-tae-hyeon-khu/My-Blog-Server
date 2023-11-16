@@ -32,7 +32,7 @@ public class CommentAPI {
      * Add Comment
      */
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
-    public void addComment(Authentication authentication, @RequestBody AddDTO.ReqDto dto) {
+    public void addComment(Authentication authentication, @RequestBody AddDTO.ReqAddDto dto) {
 
 
         Long userId = Long.parseLong(((UserDetails) authentication.getPrincipal()).getUsername());
@@ -40,6 +40,16 @@ public class CommentAPI {
         dto.setUserId(userId);
         commentAddService.addComment(dto);
     }
+
+    /**
+     * Update Comment
+     */
+    @RequestMapping(value = "/comment", method = RequestMethod.PATCH)
+    public String updateComment(Authentication authentication, @RequestBody AddDTO.ReqUpdateDto dto) {
+        commentAddService.updateComment(dto);
+        return "Success"; // 수정
+    }
+
 
     /**
      * Read Comment (게시글 하나에 달린!) : 상세 정보 모두.

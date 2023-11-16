@@ -34,7 +34,7 @@ public class PostAPI {
     }
 
     // 특정 하나의 게시글 조회
-    @GetMapping(path = "/post/{id}")
+    @GetMapping(path = "/posts/{id}")
     public Get.GetResDto getPost(@PathVariable("id") Long id) {
         return postGetService.getPost(id);
     }
