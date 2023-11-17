@@ -10,6 +10,7 @@ import kong.blog.domain.user.domain.User;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class CommentAddService {
@@ -23,7 +24,7 @@ public class CommentAddService {
         this.postRepository = postRepository;
     }
 
-    public void addComment(AddDTO.ReqDto dto) {
+    public void addComment(AddDTO.ReqAddDto dto) {
         User user = userRepository.findById(dto.getUserId()).get();
         Post post = postRepository.findById(dto.getPostId()).get();
 
@@ -31,6 +32,20 @@ public class CommentAddService {
         comment.setCreatedAt(LocalDateTime.now());
 
         commentRepository.save(comment);
+    }
+
+    public void updateComment(AddDTO.ReqUpdateDto dto ) {
+        Optional<Comment> optionalComment = commentRepository.findById(dto.commentId);
+
+        if (optionalComment.isPresent()) {
+            throw new RuntimeException("Error"); // 수정
+        }
+
+        Comment comment = optionalComment.get();
+        comment.updateComment(dto.body);
+
+        commentRepository.save(comment);
+
     }
 
 }

@@ -1,12 +1,13 @@
 package kong.blog.domain.comment.dto;
 
 public class AddDTO {
-    public static class ReqDto {
+    public static class ReqAddDto {
+
         private String body;
         private Long postId;
         private Long userId = null;
 
-        public ReqDto(String body, Long postId) {
+        public ReqAddDto(String body, Long postId) {
             this.body = body;
             this.postId = postId;
         }
@@ -19,5 +20,19 @@ public class AddDTO {
         public Long getPostId() {return this.postId;}
         public Long getUserId() {return this.userId;}
     }
+    
+    public static class ReqUpdateDto {
+        public Long commentId;
+        public String body;
+
+        public ReqUpdateDto(Long commentId, String body) {
+            this.commentId = commentId;
+            this.body = body;
+        }
+    }
+
+//    public static class ResCommentDto {
+//
+//    }
 
 }

@@ -6,6 +6,9 @@ import kong.blog.domain.post.application.PostDeleteService;
 import kong.blog.domain.post.application.PostGetService;
 import kong.blog.domain.post.dto.Get;
 import kong.blog.domain.post.dto.Post;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +34,7 @@ public class PostAPI {
     }
 
     // 특정 하나의 게시글 조회
-    @GetMapping(path = "/post/{id}")
+    @GetMapping(path = "/posts/{id}")
     public Get.GetResDto getPost(@PathVariable("id") Long id) {
         return postGetService.getPost(id);
     }
@@ -43,9 +46,10 @@ public class PostAPI {
     }
 
     // 글 조회 => 페이징 기법.
-    @GetMapping(path = "/posts/{page}")
-    public String getPosts(@PathVariable("page") Long page) {
-        return "";
+    @GetMapping(path = "/posts")
+    public Page<kong.blog.domain.post.domain.Post> getPosts(@RequestParam("page") Integer page, @RequestParam Integer size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return postGetService.getAllByPage(pageRequest);
     }
 
 

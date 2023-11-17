@@ -6,6 +6,8 @@ import kong.blog.domain.post.domain.Post;
 import kong.blog.domain.post.dto.Get;
 import kong.blog.domain.user.dao.UserRepository;
 import kong.blog.domain.user.domain.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -53,5 +55,7 @@ public class PostGetService {
                 throw new RuntimeException("Not Exist User");
             }
         }
-
+    public Page<Post> getAllByPage(Pageable pageable) {
+        return postRepository.findAll(pageable);
+    }
 }

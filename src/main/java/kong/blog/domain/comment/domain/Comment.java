@@ -6,6 +6,7 @@ import kong.blog.domain.user.domain.User;
 import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -33,10 +34,17 @@ public class Comment extends BaseEntity {
     }
 
     public Comment() {}
-    // Setter
+    // Setter => 사용 지양
     public void setUser(User user) {this.user = user;}
+
+    // Setter => 사용 지양, updateComment
+    public void updateComment(String contents) {
+        this.contents = contents;
+        this.setCreatedAt(LocalDateTime.now());
+    }
 
     // Getter
     public String getContents() {return this.contents;}
+    public Long getId() {return this.id;}
 
 }

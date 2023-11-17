@@ -2,6 +2,7 @@ package kong.blog.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -40,8 +41,11 @@ public class SecurityConfiguration {
 
                 .authorizeRequests()
                 .antMatchers(PERMIT_URL_ARRAY).permitAll()
-                .antMatchers("/user/signup", "/user/signin", "/global/jwt").permitAll() // 로그인 부분 항상 접근할 수 있도록.
+                .antMatchers("/user/signup", "/user/signin", "/global/jwt").permitAll() // 로그인 & 회원가입
+                .antMatchers(HttpMethod.GET,"/posts/**", "/comment/**").permitAll()  // Get Post & Comment
                 .anyRequest().hasAnyRole("USER", "ADMIN")
+
+
                 .and()
 
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
