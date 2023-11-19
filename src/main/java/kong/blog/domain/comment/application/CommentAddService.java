@@ -24,7 +24,7 @@ public class CommentAddService {
         this.postRepository = postRepository;
     }
 
-    public void addComment(AddDTO.ReqAddDto dto) {
+    public Comment addComment(AddDTO.ReqAddDto dto) {
         User user = userRepository.findById(dto.getUserId()).get();
         Post post = postRepository.findById(dto.getPostId()).get();
 
@@ -32,9 +32,11 @@ public class CommentAddService {
         comment.setCreatedAt(LocalDateTime.now());
 
         commentRepository.save(comment);
+
+        return comment;
     }
 
-    public void updateComment(AddDTO.ReqUpdateDto dto ) {
+    public Comment updateComment(AddDTO.ReqUpdateDto dto ) {
         Optional<Comment> optionalComment = commentRepository.findById(dto.commentId);
 
         if (optionalComment.isPresent()) {
@@ -45,7 +47,7 @@ public class CommentAddService {
         comment.updateComment(dto.body);
 
         commentRepository.save(comment);
-
+        return comment;
     }
 
 }

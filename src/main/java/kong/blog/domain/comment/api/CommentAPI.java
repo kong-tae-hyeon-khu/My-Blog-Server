@@ -32,22 +32,27 @@ public class CommentAPI {
      * Add Comment
      */
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
-    public void addComment(Authentication authentication, @RequestBody AddDTO.ReqAddDto dto) {
+    public AddDTO.ResCommentDto addComment(Authentication authentication, @RequestBody AddDTO.ReqAddDto dto) {
 
 
         Long userId = Long.parseLong(((UserDetails) authentication.getPrincipal()).getUsername());
-        System.out.println(userId);
         dto.setUserId(userId);
-        commentAddService.addComment(dto);
+
+        Comment comment = commentAddService.addComment(dto);
+
+        return new AddDTO.ResCommentDto("Success" ,comment);
+
+
     }
 
     /**
      * Update Comment
      */
     @RequestMapping(value = "/comment", method = RequestMethod.PATCH)
-    public String updateComment(Authentication authentication, @RequestBody AddDTO.ReqUpdateDto dto) {
-        commentAddService.updateComment(dto);
-        return "Success"; // 수정
+    public AddDTO.ResCommentDto updateComment(Authentication authentication, @RequestBody AddDTO.ReqUpdateDto dto) {
+        Comment comment = commentAddService.updateComment(dto);
+        return new AddDTO.ResCommentDto("Success", comment);
+
     }
 
 

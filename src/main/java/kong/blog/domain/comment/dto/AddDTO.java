@@ -1,5 +1,9 @@
 package kong.blog.domain.comment.dto;
 
+import kong.blog.domain.comment.domain.Comment;
+
+import java.time.LocalDateTime;
+
 public class AddDTO {
     public static class ReqAddDto {
 
@@ -31,8 +35,22 @@ public class AddDTO {
         }
     }
 
-//    public static class ResCommentDto {
-//
-//    }
+    public static class ResCommentDto {
+
+        public String message;
+
+        public Long commentId;
+        public String body;
+        public LocalDateTime createdAt;
+
+        public ResCommentDto(String message, Comment comment) {
+            this.message = message;
+            this.commentId = comment.getId();
+            this.body = comment.getContents();
+            this.createdAt = comment.getCreatedAt();
+        }
+
+
+    }
 
 }
