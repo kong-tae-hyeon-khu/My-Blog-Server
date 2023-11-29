@@ -27,17 +27,17 @@ public class UserAPI {
         this.userDeleteService = userDeleteService;
     }
 
-    @RequestMapping(value = "/user/signup", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/user/signup", method = RequestMethod.POST)
     public ResponseEntity<SignUp.SignUpRes> signUp(@RequestBody SignUp.SignUpReq dto) {
         return new ResponseEntity<>(new SignUp.SignUpRes(userSignUpService.signUp(dto)), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/user/signin", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/user/signin", method = RequestMethod.POST)
     public ResponseEntity<SignIn.SignInRes> signIn(@RequestBody SignIn.SignInReq dto) {
         return new ResponseEntity<>(new SignIn.SignInRes(userSignInService.SignIn(dto),"Login Success"), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/user/test", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/user/test", method = RequestMethod.GET)
     public String test(Authentication authentication) {
         // User ID
         /**

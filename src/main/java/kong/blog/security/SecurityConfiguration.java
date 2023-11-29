@@ -41,7 +41,7 @@ public class SecurityConfiguration {
 
                 .authorizeRequests()
                 .antMatchers(PERMIT_URL_ARRAY).permitAll()
-                .antMatchers("/user/signup", "/user/signin", "/global/jwt").permitAll() // 로그인 & 회원가입
+                .antMatchers("/api/user/signup", "/api/user/signin", "/api/global/jwt").permitAll() // 로그인 & 회원가입
                 .antMatchers(HttpMethod.GET,"/posts/**", "/comment/**").permitAll()  // Get Post & Comment
                 .anyRequest().hasAnyRole("USER", "ADMIN")
 
